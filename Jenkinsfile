@@ -21,11 +21,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                mkdir -p /opt/app
-                cp target/*.jar /opt/app/
+                mkdir -p deploy
+                cp target/*.jar deploy/
                 '''
             }
         }
-    
+
+
     }
 }

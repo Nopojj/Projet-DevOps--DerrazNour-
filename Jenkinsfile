@@ -1,16 +1,17 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+    tools {
+        maven 'Maven3'
+    }
 
+    stages {
         stage('Build & Test') {
             steps {
-                sh 'mvn clean test'
+                dir('.') {
+                    sh 'ls -la'
+                    sh 'mvn clean test'
+                }
             }
         }
     }

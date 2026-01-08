@@ -17,5 +17,15 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                mkdir -p /opt/app
+                cp target/*.jar /opt/app/
+                '''
+            }
+        }
+    
     }
 }

@@ -1,4 +1,4 @@
-package com.devops;
+package src.main.java.com.devops;
 
 public class App {
     public static void main(String[] args) {

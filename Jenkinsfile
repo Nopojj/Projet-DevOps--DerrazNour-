@@ -26,7 +26,28 @@ pipeline {
                 '''
             }
         }
+    }
 
+    // ⬇️ ⬇️ ⬇️ ICI : FIN DU PIPELINE
+    post {
+        success {
+            withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_WEBHOOK')]) {
+                sh """
+                curl -X POST -H 'Content-type: application/json' \
+                --data '{"text":"✅ Jenkins Pipeline SUCCESS : Build, Tests & Deploy OK"}' \
+                $SLACK_WEBHOOK
+                """
+            }
+        }
 
+        failure {
+            withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_WEBHOOK')]) {
+                sh """
+                curl -X POST -H 'Content-type: application/json' \
+                --data '{"text":"❌ Jenkins Pipeline FAILED"}' \
+                $SLACK_WEBHOOK
+                """
+            }
+        }
     }
 }

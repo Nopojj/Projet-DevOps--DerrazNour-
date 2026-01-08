@@ -8,12 +8,10 @@ pipeline {
     stages {
         stage('Build & Test') {
             steps {
-                dir('.') {
-                    sh 'ls -la'
-                    sh 'mvn clean test'
-                }
+                sh 'mvn clean package'
             }
         }
+
         stage('Archive') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
